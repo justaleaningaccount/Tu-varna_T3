@@ -1,6 +1,10 @@
 package Commands;
+import Exceptions.WrongCommand;
 import org.w3c.dom.*;
-public class Setting
+
+import java.util.List;
+
+public class Setting implements Command
 {
     public boolean set(Document doc, String id, String key, String value) {
         NodeList elements = doc.getElementsByTagName("*");
@@ -14,4 +18,13 @@ public class Setting
         return false;
     }
 
+    @Override
+    public String execute(List<String> args) throws WrongCommand {
+        return "";
+    }
+
+    @Override
+    public String helpMsg() {
+        return "Set a value to an attribute";
+    }
 }
