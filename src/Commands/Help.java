@@ -16,14 +16,14 @@ public class Help implements Command
     @Override
     public String execute(List<String> args) throws WrongCommand {
         String helpMessage = """
-                Commands :\n" +
+                Commands : \n" +
                 "Open: Отваря файла със данни. \n" +
                 "Close: Затваря текущия файл. \n" +
                 "Save: Запазва текущия файл \n" +
                 "Save as : Запазва данните в нов файл \n" +
                 "Help: Помощ за приспособлението на различните команди \n +" +
                 "Exit: Затваря програмата \n" +
-                "Print: Извежда на екрана информацията от XML файла\n" +
+                "Print: Извежда на екрана информацията от XML файла \n" +
                 "Select: Извежда стойност на атрибут по даден идентификатор на елемента и ключ на атрибута \n" +
                 "Set: Присвоява стойност на атрибут \n" +
                 "Children: Списък с атрибути на вложените елементи \n" +
