@@ -1,6 +1,8 @@
-package Commands;
+package Commands.Project;
 
+import Commands.Context;
 import Exceptions.WrongCommand;
+import Interfaces.Command;
 import org.w3c.dom.*;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class Select implements Command
     }
 
     @Override
-    public String execute(List<String> args) throws WrongCommand {
+    public String execute(String[] args, Context context) throws WrongCommand {
         return "";
     }
 

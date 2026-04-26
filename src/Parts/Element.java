@@ -39,7 +39,7 @@ public class Element
     public void addChild(Element child) { children.add(child); }
     public void setAttribute(String k, String v) { attributes.put(k, v); }
 
-    // convenience: get resolved id (first value in map)
+
     public Integer getResolvedId() {
         if (id.isEmpty()) return null;
         return id.values().iterator().next();

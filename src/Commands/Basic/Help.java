@@ -1,21 +1,17 @@
-package Commands;
+package Commands.Basic;
 
+import Commands.Context;
 import Exceptions.WrongCommand;
+import Interfaces.Command;
 
 import java.util.List;
-import java.util.Map;
 
 public class Help implements Command
 {
-    private Map<String,Command> commands;
-
-    public Help(Map<String,Command> commands) {
-        this.commands = commands;
-    }
 
     @Override
-    public String execute(List<String> args) throws WrongCommand {
-        String helpMessage = """
+    public String execute(String[] args, Context context) throws WrongCommand {
+        return  """
                 Commands : \n" +
                 "Open: Отваря файла със данни. \n" +
                 "Close: Затваря текущия файл. \n" +
@@ -33,24 +29,6 @@ public class Help implements Command
                 "Newchild: Добавяне на НОВ наследник на елемент. Новият елемент няма атрибути, освен идетификатор \n" +
                 "Xpath: операция за изпълнение на прости XPath 2.0 заявки към даден елемент,която връща списък от XML елементи
                 """;
-        if (args.isEmpty())
-        {
-            return helpMessage;
-        }
-        else
-        {
-            String commandName = args.getFirst().toLowerCase();
-            Command command = commands.get(commandName);
-            if (command != null)
-            {
-                return command.helpMsg();
-            }
-            else
-            {
-                throw new WrongCommand("No such command exist: " + commandName);
-            }
-        }
-
     }
 
     @Override

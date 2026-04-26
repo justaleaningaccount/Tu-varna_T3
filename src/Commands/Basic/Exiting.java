@@ -1,14 +1,19 @@
-package Commands;
+package Commands.Basic;
+
+import Commands.Context;
+import Interfaces.Command;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Exiting implements Command
 {
+
     public Exiting(){};
 
     @Override
-    public String execute(List<String> args) {
+    public String execute(String[] args, Context context)
+    {
+        System.exit(0);
         return "Exit";
     }
 
