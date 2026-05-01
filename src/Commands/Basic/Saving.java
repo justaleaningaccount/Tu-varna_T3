@@ -8,13 +8,26 @@ import java.util.List;
 public class Saving implements Command
 {
 
+    public Saving() {}
+
     @Override
     public String execute(String[] args, Context context) throws WrongCommand {
-        return "";
+        String filename = context.getFilename();
+        if (filename == null || filename.isEmpty()) {
+            throw new WrongCommand("No file is currently open. Use 'SavingAs <file>' to save to a specific file.");
+        }
+
+        try {
+            context.getSaveStorage().saving(context.getElement(), filename);
+        } catch (Exception e) {
+            throw new WrongCommand("Error saving file: " + e.getMessage());
+        }
+
+        return "Saved " + filename;
     }
 
     @Override
     public String helpMsg() {
-        return "Saves file";
+        return  "Saves file";
     }
 }

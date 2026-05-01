@@ -1,17 +1,25 @@
 package Commands.Basic;
 
+import Commands.Context;
+import Exceptions.WrongCommand;
 import Interfaces.Command;
-import Commands.*;
 
 public class Closing implements Command
 {
+    public Closing() {}
 
     @Override
-    public String execute(String[] args,Context context)
+    public String execute(String[] args, Context context) throws WrongCommand
     {
-
         String file = context.getFilename();
-        return "Closing" +file;
+        if (file == null || file.isEmpty()) {
+            throw new WrongCommand("No file is currently open.");
+        }
+
+        context.setFilename(null);
+        context.setElement(null);
+
+        return "Closed " + file;
     }
 
     @Override

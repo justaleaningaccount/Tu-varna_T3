@@ -4,8 +4,6 @@ import Commands.Context;
 import Exceptions.WrongCommand;
 import Interfaces.Command;
 
-import java.util.List;
-
 public class Help implements Command
 {
 

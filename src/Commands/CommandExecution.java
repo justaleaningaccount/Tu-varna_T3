@@ -1,6 +1,7 @@
 package Commands;
 
 import Commands.Basic.*;
+import Commands.Basic.Printing;
 import Commands.Project.Select;
 import Commands.Project.Setting;
 import Exceptions.WrongCommand;
@@ -23,6 +24,7 @@ public class CommandExecution
         commands.put("Closing",new Closing());
 
         commands.put("Select",new Select());
+        commands.put("Print",new Printing());
         commands.put("Set",new Setting());
     }
     public Command getCommand(String commandName) {
