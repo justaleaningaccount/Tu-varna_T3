@@ -1,7 +1,7 @@
 package Commands;
 
 import Commands.Basic.*;
-import Commands.Basic.Printing;
+import Commands.Project.Printing;
 import Commands.Project.Select;
 import Commands.Project.Setting;
 import Exceptions.WrongCommand;

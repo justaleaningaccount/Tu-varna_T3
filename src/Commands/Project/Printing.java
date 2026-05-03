@@ -1,5 +1,4 @@
-package Commands.Basic;
-
+package Commands.Project;
 import Commands.Context;
 import Exceptions.WrongCommand;
 import Interfaces.Command;

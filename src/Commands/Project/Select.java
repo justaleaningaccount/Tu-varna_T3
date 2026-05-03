@@ -1,11 +1,7 @@
 package Commands.Project;
-
 import Commands.Context;
 import Exceptions.WrongCommand;
 import Interfaces.Command;
-import org.w3c.dom.*;
-
-import java.util.List;
 
 public class Select implements Command
 {

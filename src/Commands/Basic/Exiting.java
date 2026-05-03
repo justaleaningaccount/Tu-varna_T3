@@ -3,8 +3,6 @@ package Commands.Basic;
 import Commands.Context;
 import Interfaces.Command;
 
-import java.util.List;
-
 public class Exiting implements Command
 {
 
