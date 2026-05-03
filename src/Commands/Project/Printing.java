@@ -32,13 +32,11 @@ public class Printing implements Command {
         String indent = "  ".repeat(Math.max(0, indentLevel));
         sb.append(indent).append("<").append(escapeXmlName(element.getName()));
 
-        // include resolved id if present
         Integer resolvedId = element.getResolvedId();
         if (resolvedId != null) {
             sb.append(" id=\"").append(escapeXml(String.valueOf(resolvedId))).append("\"");
         }
 
-        // attributes
         for (Map.Entry<String, String> attr : element.getAttributes().entrySet()) {
             sb.append(" ").append(escapeXmlName(attr.getKey()))
                     .append("=\"").append(escapeXml(attr.getValue())).append("\"");
@@ -71,9 +69,6 @@ public class Printing implements Command {
         sb.append(indent).append("</").append(escapeXmlName(element.getName())).append(">").append("\n");
     }
 
-    /**
-     * Escape XML special characters in text content and attribute values.
-     */
     private String escapeXml(String s) {
         if (s == null) return "";
         StringBuilder out = new StringBuilder();
@@ -90,11 +85,6 @@ public class Printing implements Command {
         return out.toString();
     }
 
-    /**
-     * Basic sanitization for element/attribute names to avoid illegal characters.
-     * This method keeps the name as-is but replaces spaces with underscores.
-     * It does not perform full XML name validation; adjust if stricter rules are needed.
-     */
     private String escapeXmlName(String name) {
         if (name == null) return "element";
         return name.replaceAll("\\s+", "_");

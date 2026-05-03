@@ -1,9 +1,7 @@
 package Commands;
 
 import Commands.Basic.*;
-import Commands.Project.Printing;
-import Commands.Project.Select;
-import Commands.Project.Setting;
+import Commands.Project.*;
 import Exceptions.WrongCommand;
 import Interfaces.Command;
 
@@ -26,6 +24,7 @@ public class CommandExecution
         commands.put("Select",new Select());
         commands.put("Print",new Printing());
         commands.put("Set",new Setting());
+        commands.put("Deleting",new Deleting());
     }
     public Command getCommand(String commandName) {
         Command command = commands.get(commandName.toLowerCase());

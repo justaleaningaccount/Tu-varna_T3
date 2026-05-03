@@ -1,4 +1,5 @@
 package Commands.Project;
+
 import Commands.Context;
 import Exceptions.WrongCommand;
 import Interfaces.Command;
@@ -7,14 +8,13 @@ import Parts.Element;
 import java.util.List;
 import java.util.Map;
 
-public class Select implements Command
-{
-    public Select() {}
+public class Deleting implements Command {
+    public Deleting() {}
 
     @Override
     public String execute(String[] args, Context context) throws WrongCommand {
         if (args == null || args.length < 2) {
-            throw new WrongCommand("Error. Not enough arguments. Usage: Select <elementId> <attributeKey>");
+            throw new WrongCommand("Error. Not enough arguments. Usage: Delete <elementId> <attributeKey>");
         }
 
         String idStr = args[0];
@@ -39,17 +39,18 @@ public class Select implements Command
             throw new WrongCommand("Invalid element identifier. It must be an integer.");
         }
 
-        Element found = findByResolvedId(root, targetId);
-        if (found == null) {
+        Element target = findByResolvedId(root, targetId);
+        if (target == null) {
             throw new WrongCommand("Element with id " + targetId + " not found.");
         }
 
-        Map<String, String> attrs = found.getAttributes();
+        Map<String, String> attrs = target.getAttributes();
         if (!attrs.containsKey(attrKey)) {
             throw new WrongCommand("Attribute '" + attrKey + "' not found on element with id " + targetId + ".");
         }
 
-        return attrs.get(attrKey);
+        String removed = attrs.remove(attrKey);
+        return removed;
     }
 
     private Element findByResolvedId(Element current, int targetId) {
@@ -68,10 +69,10 @@ public class Select implements Command
 
         return null;
     }
-
     @Override
     public String helpMsg() {
-        return "Извежда стойност на атрибут по даден идентификатор на елемента и ключ на атрибута";
+        return "Deletes an attribute of an element by key";
     }
+
 
 }
