@@ -6,7 +6,7 @@ import Interfaces.Command;
 public class Exiting implements Command
 {
 
-    public Exiting(){};
+    public Exiting(){}
 
     @Override
     public String execute(String[] args, Context context)
