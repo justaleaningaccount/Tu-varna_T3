@@ -27,7 +27,7 @@ public class CommandExecution
         commands.put("Deleting",new Deleting());
     }
     public Command getCommand(String commandName) {
-        Command command = commands.get(commandName.toLowerCase());
+        Command command = commands.get(commandName);
 
         if (command == null)
         {
