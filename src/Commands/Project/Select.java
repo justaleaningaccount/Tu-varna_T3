@@ -48,7 +48,6 @@ public class Select implements Command
         if (!attrs.containsKey(attrKey)) {
             throw new WrongCommand("Attribute '" + attrKey + "' not found on element with id " + targetId + ".");
         }
-
         return attrs.get(attrKey);
     }
 
@@ -57,7 +56,6 @@ public class Select implements Command
         if (resolved != null && resolved == targetId) {
             return current;
         }
-
         List<Element> children = current.getChildren();
         if (children == null || children.isEmpty()) return null;
 
@@ -65,7 +63,6 @@ public class Select implements Command
             Element result = findByResolvedId(child, targetId);
             if (result != null) return result;
         }
-
         return null;
     }
 
@@ -73,5 +70,4 @@ public class Select implements Command
     public String helpMsg() {
         return "Извежда стойност на атрибут по даден идентификатор на елемента и ключ на атрибута";
     }
-
 }

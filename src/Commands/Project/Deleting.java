@@ -73,6 +73,4 @@ public class Deleting implements Command {
     public String helpMsg() {
         return "Deletes an attribute of an element by key";
     }
-
-
 }
