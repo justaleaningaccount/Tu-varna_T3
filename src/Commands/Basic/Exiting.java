@@ -5,7 +5,6 @@ import Interfaces.Command;
 
 public class Exiting implements Command
 {
-
     public Exiting(){}
 
     @Override
