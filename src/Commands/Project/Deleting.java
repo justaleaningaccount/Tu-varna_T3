@@ -1,76 +1,70 @@
 package Commands.Project;
 
 import Commands.Context;
-import Exceptions.WrongCommand;
+import Exceptions.BadIndex;
+import Exceptions.NoElement;
+import Exceptions.NoFile;
 import Interfaces.Command;
 import Parts.Element;
+import Parts.FinderOfElem;
 
-import java.util.List;
 import java.util.Map;
 
 public class Deleting implements Command {
     public Deleting() {}
 
     @Override
-    public String execute(String[] args, Context context) throws WrongCommand {
-        if (args == null || args.length < 2) {
-            throw new WrongCommand("Error. Not enough arguments. Usage: Delete <elementId> <attributeKey>");
+    public String execute(String[] args, Context context) throws NoElement
+    {
+        if (args == null || args.length < 2)
+        {
+            throw new NoElement("Too little arguments.");
         }
 
-        String idStr = args[0];
-        String attrKey = args[1];
+        String id = args[0];
+        String attribute = args[1];
 
-        if (idStr == null || idStr.isEmpty()) {
-            throw new WrongCommand("Error. Element identifier is empty.");
+        if (id == null || id.isEmpty()) {
+            throw new NoElement("No element id");
         }
-        if (attrKey == null || attrKey.isEmpty()) {
-            throw new WrongCommand("Error. Attribute key is empty.");
-        }
-
-        Element root = context.getElement();
-        if (root == null) {
-            throw new WrongCommand("No document loaded.");
+        if (attribute == null || attribute.isEmpty()) {
+            throw new NoElement("No attribute id");
         }
 
-        int targetId;
-        try {
-            targetId = Integer.parseInt(idStr);
-        } catch (NumberFormatException e) {
-            throw new WrongCommand("Invalid element identifier. It must be an integer.");
+        Element ele = context.getElement();
+        if (ele == null)
+        {
+            throw new NoFile("No document.");
         }
 
-        Element target = findByResolvedId(root, targetId);
-        if (target == null) {
-            throw new WrongCommand("Element with id " + targetId + " not found.");
+        int target;
+        try
+        {
+            target = Integer.parseInt(id);
+        }
+        catch (Exception e)
+        {
+            throw new BadIndex("Id must an number");
         }
 
-        Map<String, String> attrs = target.getAttributes();
-        if (!attrs.containsKey(attrKey)) {
-            throw new WrongCommand("Attribute '" + attrKey + "' not found on element with id " + targetId + ".");
+        Element target1 = FinderOfElem.findByResolvedId(ele, target);
+        if (target1 == null)
+        {
+            throw new NoElement("No elem with" + target + " found.");
         }
 
-        String removed = attrs.remove(attrKey);
-        return removed;
+        Map<String, String> att = target1.getAttributes();
+        if (!att.containsKey(attribute))
+        {
+            throw new NoElement("Attribute '" + attribute + "' cant be found om element with id " + target);
+        }
+
+        return att.remove(attribute);
     }
 
-    private Element findByResolvedId(Element current, int targetId) {
-        Integer resolved = current.getResolvedId();
-        if (resolved != null && resolved == targetId) {
-            return current;
-        }
-
-        List<Element> children = current.getChildren();
-        if (children == null || children.isEmpty()) return null;
-
-        for (Element child : children) {
-            Element result = findByResolvedId(child, targetId);
-            if (result != null) return result;
-        }
-
-        return null;
-    }
     @Override
-    public String helpMsg() {
+    public String helpMsg()
+    {
         return "Deletes an attribute of an element by key";
     }
 }

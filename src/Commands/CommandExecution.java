@@ -14,26 +14,26 @@ public class CommandExecution
     public CommandExecution()
     {
         this.commands = new HashMap<>();
-        commands.put("Exit",new Exiting());
-        commands.put("Help",new Help());
-        commands.put("Save",new Saving());
-        commands.put("Open",new Open());
-        commands.put("SavingAs",new SavingAs());
-        commands.put("Closing",new Closing());
+        commands.put("exiting", new Exiting());
+        commands.put("help", new Help());
+        commands.put("saving", new Saving());
+        commands.put("open", new Open());
+        commands.put("savingAs", new SavingAs());
+        commands.put("closing", new Closing());
 
-        commands.put("Select",new Select());
-        commands.put("Print",new Printing());
-        commands.put("Set",new Setting());
-        commands.put("Deleting",new Deleting());
+        commands.put("select", new Select());
+        commands.put("printing", new Printing());
+        commands.put("setting", new Setting());
+        commands.put("deleting", new Deleting());
     }
     public Command getCommand(String commandName) {
-        Command command = commands.get(commandName);
+        if (commandName == null) throw new WrongCommand("Wrong command. Use 'help' for help");
+        Command command = commands.get(commandName.toLowerCase());
 
         if (command == null)
         {
-            throw new WrongCommand("Invalid command. Please  use 'help'  for help");
+            throw new WrongCommand("Wrong command. Use 'help' for help");
         }
-
         return command;
     }
 }

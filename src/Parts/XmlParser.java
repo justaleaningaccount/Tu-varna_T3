@@ -1,22 +1,24 @@
 package Parts;
 
+import Exceptions.BadIndex;
 import Exceptions.WrongPlace;
 
 public class XmlParser
 {
     private final String text;
     private int pos = 0;
-    private final int len;
+    private final int length;
 
     public XmlParser(String text)
     {
         this.text = text == null ? "" : text;
-        this.len = this.text.length();
+        this.length = this.text.length();
     }
 
-    public Element parseElement() throws WrongPlace {
+    public Element parseElement() throws WrongPlace
+    {
         skipWhitespace();
-        if (!peekStartsWith("<"))
+        if (!peekStarting("<"))
         {
             throw new WrongPlace("Expected '<' at position " + pos);
         }
@@ -28,12 +30,15 @@ public class XmlParser
         {
             skipWhitespace();
             char c = peek();
-            if (c == '/' || c == '>') break;
+            if (c == '/' || c == '>')
+            {
+                break;
+            }
             String attrName = parseName();
             skipWhitespace();
             expect('=');
             skipWhitespace();
-            String attrValue = parseQuotedValue();
+            String attrValue = quotedValue();
             if ("id".equals(attrName))
             {
                 try
@@ -48,7 +53,6 @@ public class XmlParser
                 e.setAttribute(attrName, attrValue);
             }
         }
-
         skipWhitespace();
         if (peek() == '/')
         {
@@ -56,13 +60,12 @@ public class XmlParser
             expect('>');
             return e;
         }
-
         expect('>');
-
-        StringBuilder textContent = new StringBuilder();
-        while (true) {
-            skipWhitespacePreserveNewline();
-            if (peekStartsWith("</"))
+        StringBuilder content = new StringBuilder();
+        while (true)
+        {
+            skipWhitespaceButBetter();
+            if (peekStarting("</"))
             {
                 expect('<');
                 expect('/');
@@ -71,31 +74,38 @@ public class XmlParser
                 expect('>');
                 break;
             }
-            else if (peekStartsWith("<"))
+            else if (peekStarting("<"))
             {
                 Element child = parseElement();
                 e.addChild(child);
             }
             else
             {
-                String t = parseTextNode();
-                if (t != null && !t.isBlank())
+                String text = parseTextNode();
+                if (text != null && !text.isBlank())
                 {
-                    if (!textContent.isEmpty()) textContent.append(" ");
-                    textContent.append(t.trim());
+                    if (!content.isEmpty())
+                    {
+                        content.append(" ");
+                    }
+                    content.append(text.trim());
                 }
             }
         }
-        if (!textContent.isEmpty()) e.setTextContent(textContent.toString());
+        if (!content.isEmpty()) e.setTextContent(content.toString());
         return e;
     }
-
     private String parseTextNode()
     {
         int start = pos;
-        while (pos < len && text.charAt(pos) != '<')
+        while (pos < length && text.charAt(pos) != '<')
+        {
             pos++;
-        if (pos > start) return XmlLoader.xmlSymbols(text.substring(start, pos));
+        }
+        if (pos > start)
+        {
+            return XmlLoader.xmlSymbols(text.substring(start, pos));
+        }
         return null;
     }
 
@@ -103,7 +113,7 @@ public class XmlParser
     {
         skipWhitespace();
         int start = pos;
-        while (pos < len)
+        while (pos < length)
         {
             char c = text.charAt(pos);
             if (Character.isWhitespace(c) || c == '=' || c == '>' || c == '/' || c == '<') break;
@@ -111,24 +121,28 @@ public class XmlParser
         }
         if (pos == start)
         {
-            throw new WrongPlace("Expected name at position " + pos);
+            throw new WrongPlace("Expected name at " + pos);
         }
         return text.substring(start, pos);
     }
 
-    private String parseQuotedValue() throws WrongPlace {
+    private String quotedValue() throws WrongPlace
+    {
         skipWhitespace();
-        char q = peek();
-        if (q != '"' && q != '\'')
+        char ch = peek();
+        if (ch != '"' && ch != '\'')
         {
-            throw new WrongPlace("Expected quoted attribute value at " + pos);
+            throw new WrongPlace("Expected attribute value at " + pos);
         }
         pos++;
         int start = pos;
-        while (pos < len && text.charAt(pos) != q) pos++;
-        if (pos >= len)
+        while (pos < length && text.charAt(pos) != ch)
         {
-            throw new WrongPlace("Unterminated attribute value");
+            pos++;
+        }
+        if (pos >= length)
+        {
+            throw new BadIndex("Bad attribute value");
         }
         String val = text.substring(start, pos);
         pos++;
@@ -137,28 +151,37 @@ public class XmlParser
 
     private void skipWhitespace()
     {
-        while (pos < len && Character.isWhitespace(text.charAt(pos))) pos++;
+        while (pos < length && Character.isWhitespace(text.charAt(pos)))
+        {
+            pos++;
+        }
     }
 
-    private void skipWhitespacePreserveNewline()
+    private void skipWhitespaceButBetter()
     {
-        while (pos < len && (text.charAt(pos) == ' ' || text.charAt(pos) == '\t' || text.charAt(pos) == '\r' || text.charAt(pos) == '\n')) pos++;
+        while (pos < length && (text.charAt(pos) == ' ' || text.charAt(pos) == '\t' || text.charAt(pos) == '\r' || text.charAt(pos) == '\n'))
+        {
+            pos++;
+        }
     }
 
     private char peek()
     {
-        if (pos >= len) return (char) -1;
+        if (pos >= length)
+        {
+            return (char) - 1;
+        }
         return text.charAt(pos);
     }
 
-    private boolean peekStartsWith(String s)
+    private boolean peekStarting(String s)
     {
         return text.regionMatches(pos, s, 0, s.length());
     }
 
     private void expect(char c) throws WrongPlace
     {
-        if (pos >= len || text.charAt(pos) != c)
+        if (pos >= length || text.charAt(pos) != c)
         {
             throw new WrongPlace("Expected '" + c + "' at position " + pos);
         }

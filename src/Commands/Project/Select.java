@@ -1,10 +1,11 @@
 package Commands.Project;
 import Commands.Context;
-import Exceptions.WrongCommand;
+import Exceptions.BadIndex;
+import Exceptions.NoElement;
 import Interfaces.Command;
 import Parts.Element;
+import Parts.FinderOfElem;
 
-import java.util.List;
 import java.util.Map;
 
 public class Select implements Command
@@ -12,59 +13,48 @@ public class Select implements Command
     public Select() {}
 
     @Override
-    public String execute(String[] args, Context context) throws WrongCommand {
-        if (args == null || args.length < 2) {
-            throw new WrongCommand("Error. Not enough arguments. Usage: Select <elementId> <attributeKey>");
+    public String execute(String[] args, Context context) throws NoElement
+    {
+        if (args == null || args.length < 2)
+        {
+            throw new NoElement("Too little arguments");
         }
 
-        String idStr = args[0];
-        String attrKey = args[1];
+        String id = args[0];
+        String att = args[1];
 
-        if (idStr == null || idStr.isEmpty()) {
-            throw new WrongCommand("Error. Element identifier is empty.");
+        if (id == null || id.isEmpty()) {
+            throw new NoElement("No element id");
         }
-        if (attrKey == null || attrKey.isEmpty()) {
-            throw new WrongCommand("Error. Attribute key is empty.");
+        if (att == null || att.isEmpty()) {
+            throw new NoElement("No attribute id");
         }
 
-        Element root = context.getElement();
-        if (root == null) {
-            throw new WrongCommand("No document loaded.");
+        Element element = context.getElement();
+        if (element == null) {
+            throw new NoElement("No document.");
         }
 
         int targetId;
-        try {
-            targetId = Integer.parseInt(idStr);
-        } catch (NumberFormatException e) {
-            throw new WrongCommand("Invalid element identifier. It must be an integer.");
+        try
+        {
+            targetId = Integer.parseInt(id);
+        } catch (Exception e) {
+            throw new BadIndex("Id of an element must a number.");
         }
 
-        Element found = findByResolvedId(root, targetId);
+        Element found = FinderOfElem.findByResolvedId(element, targetId);
         if (found == null) {
-            throw new WrongCommand("Element with id " + targetId + " not found.");
+            throw new NoElement("No element with" + targetId + " found.");
         }
 
-        Map<String, String> attrs = found.getAttributes();
-        if (!attrs.containsKey(attrKey)) {
-            throw new WrongCommand("Attribute '" + attrKey + "' not found on element with id " + targetId + ".");
+        Map<String, String> attribute = found.getAttributes();
+        if (!attribute.containsKey(att)) {
+            throw new NoElement("Attribute '" + att + "' was not found on element with id " + targetId);
         }
-        return attrs.get(attrKey);
+        return attribute.get(att);
     }
 
-    private Element findByResolvedId(Element current, int targetId) {
-        Integer resolved = current.getResolvedId();
-        if (resolved != null && resolved == targetId) {
-            return current;
-        }
-        List<Element> children = current.getChildren();
-        if (children == null || children.isEmpty()) return null;
-
-        for (Element child : children) {
-            Element result = findByResolvedId(child, targetId);
-            if (result != null) return result;
-        }
-        return null;
-    }
 
     @Override
     public String helpMsg() {

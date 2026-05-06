@@ -17,10 +17,15 @@ public class IdMaker
         if (resolved != null) max = Math.max(max, resolved);
 
         List<Element> children = current.getChildren();
-        if (children != null) {
-            for (Element child : children) {
+        if (children != null)
+        {
+            for (Element child : children)
+            {
                 int childMax = scanMaxId(child);
-                if (childMax > max) max = childMax;
+                if (childMax > max)
+                {
+                    max = childMax;
+                }
             }
         }
 

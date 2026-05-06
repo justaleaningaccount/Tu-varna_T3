@@ -18,13 +18,13 @@ public class XmlLoader
     }
     public static Element load(String filename) throws Exception
     {
-        File f = new File(filename);
-        if (!f.exists()) return null;
+        File file = new File(filename);
+        if (!file.exists()) return null;
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(f)))
+        try (BufferedReader br = new BufferedReader(new FileReader(file)))
         {
-            String line;
-            while ((line = br.readLine()) != null) sb.append(line).append("\n");
+            String str;
+            while ((str = br.readLine()) != null) sb.append(str).append("\n");
         }
         XmlParser parser = new XmlParser(sb.toString());
         return parser.parseElement();
@@ -32,10 +32,10 @@ public class XmlLoader
 
     public static void writeElement(Element elem, StringBuilder sb, int i)
     {
-        String ind = "  ".repeat(Math.max(0, i));
-        sb.append(ind).append("<").append(xmlName(elem.getName()));
-        Integer rid = elem.getResolvedId();
-        if (rid != null) sb.append(" id=\"").append(rid).append("\"");
+        String s = "  ".repeat(Math.max(0, i));
+        sb.append(s).append("<").append(xmlName(elem.getName()));
+        Integer id = elem.getResolvedId();
+        if (id != null) sb.append(" id=\"").append(id).append("\"");
         for (Map.Entry<String, String> a : elem.getAttributes().entrySet())
         {
             sb.append(" ").append(xmlName(a.getKey())).append("=\"").append(xmlAttr(a.getValue())).append("\"");
@@ -45,7 +45,8 @@ public class XmlLoader
         boolean hasText = elem.getTextContent() != null && !elem.getTextContent().isEmpty();
         if (!hasChildren && !hasText)
         {
-            sb.append("/>").append("\n"); return;
+            sb.append("/>").append("\n");
+            return;
         }
         sb.append(">").append("\n");
         if (hasText)
@@ -56,33 +57,49 @@ public class XmlLoader
         {
             for (Element c : elem.getChildren()) writeElement(c, sb, i + 1);
         }
-        sb.append(ind).append("</").append(xmlName(elem.getName())).append(">").append("\n");
+        sb.append(s).append("</").append(xmlName(elem.getName())).append(">").append("\n");
     }
 
     private static String xmlText(String text)
     {
-        if (text == null) return "";
-        else return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        if (text == null)
+        {
+            return "";
+        }
+        else
+        {
+            return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        }
     }
 
     private static String xmlAttr(String value) {
-        if (value==null) return "";
-        else return value.replace("&", "&amp;").replace("\"", "&quot;")
-                .replace("<", "&lt;").replace(">", "&gt;").replace("'", "&apos;");
+        if (value==null)
+        {
+            return "";
+        }
+        else
+        {
+            return value.replace("&", "&amp;").replace("\"", "&quot;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&apos;");
+        }
     }
 
     private static String xmlName(String name) {
-        if (name == null) return "element";
-        else return name.replaceAll(" ", "_");
+        if (name == null)
+        {
+            return "element";
+        }
+        else
+        {
+            return name.replaceAll(" ", "_");
+        }
     }
 
     public static String xmlSymbols(String substring)
     {
-        if (substring == null) return null;
-        return substring.replace("&amp;", "&")
-                .replace("&lt;", "<")
-                .replace("&gt;", ">")
-                .replace("&quot;", "\"")
-                .replace("&apos;", "'");
+        if (substring == null)
+        {
+            return null;
+        }
+        else return substring.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", "\"").replace("&apos;", "'");
     }
 }

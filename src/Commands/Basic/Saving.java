@@ -1,24 +1,29 @@
 package Commands.Basic;
 import Commands.Context;
-import Exceptions.WrongCommand;
+import Exceptions.NoElement;
+import Exceptions.NoFile;
 import Interfaces.Command;
 
 public class Saving implements Command
 {
-
     public Saving() {}
 
     @Override
-    public String execute(String[] args, Context context) throws WrongCommand {
+    public String execute(String[] args, Context context) throws NoFile
+    {
         String filename = context.getFilename();
-        if (filename == null || filename.isEmpty()) {
-            throw new WrongCommand("No file is currently open. Use 'SavingAs <file>' to save to a specific file.");
+        if (filename == null || filename.isEmpty())
+        {
+            throw new NoFile("No file is currently open.");
         }
 
-        try {
+        try
+        {
             context.getSaveStorage().saving(context.getElement(), filename);
-        } catch (Exception e) {
-            throw new WrongCommand("Error saving file: " + e.getMessage());
+        }
+        catch (Exception e)
+        {
+            throw new NoFile("Error saving file: " + e.getMessage());
         }
 
         return "Saved " + filename;
@@ -26,6 +31,6 @@ public class Saving implements Command
 
     @Override
     public String helpMsg() {
-        return  "Saves file";
+        return "Saves file";
     }
 }
