@@ -1,0 +1,73 @@
+package Project.Commands;
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Engine {
+    private final Context context;
+    private final CommandExecution commandExecution;
+
+    public Engine(Context context, CommandExecution commandExecution) {
+        this.context = context;
+        this.commandExecution = commandExecution;
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        this.context.setScanner(scanner);
+        System.out.println("Welcome! Please enter command:");
+
+        while (true) {
+            System.out.print("> ");
+            String input;
+            try {
+                if (!scanner.hasNextLine()) break;
+                input = scanner.nextLine().trim();
+            } catch (Exception e) {
+                break;
+            }
+
+            if (input.isEmpty()) continue;
+            if (input.equalsIgnoreCase("exit")) {
+                System.out.println("Exiting...");
+                break;
+            }
+
+            try {
+                String commandName;
+                String[] args;
+
+                if (input.toLowerCase().startsWith("save as")) {
+                    commandName = "saving as";
+                    String rest = input.substring(7).trim();
+                    args = rest.isEmpty() ? new String[0] : new String[] { rest.replace("\"", "") };
+                } else {
+                    String[] parts = input.split("\\s+");
+                    commandName = parts[0];
+                    args = parts.length > 1 ? Arrays.copyOfRange(parts, 1, parts.length) : new String[0];
+                }
+
+                var command = commandExecution.getCommand(commandName);
+                String result = command.execute(args, context);
+                if (result != null && !result.isEmpty()) System.out.println(result);
+
+            } catch (Exception e) {
+                System.out.println("Invalid command: " + e.getMessage());
+            }
+        }
+
+        scanner.close();
+    }
+
+    public static void main(String[] args) {
+        CommandExecution execution = new CommandExecution();
+        Context ctx = new Context(new Project.Parts.SaveStorage());
+        Engine engine = new Engine(ctx, execution);
+
+        Project.Parts.Element root = new Project.Parts.Element("root");
+        root.id.put(0, 1);
+        ctx.setElement(root);
+
+        engine.run();
+    }
+}
