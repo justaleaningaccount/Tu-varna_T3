@@ -5,6 +5,11 @@ import Project.Exceptions.NoElement;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.XmlLoader;
+/**
+ * Prints the entire loaded XML document (element tree) as formatted XML.
+ * Throws when no element/document is loaded in the context.
+ * Uses XmlLoader.writeElement to produce the textual representation.
+ */
 
 public class Printing implements Command {
 

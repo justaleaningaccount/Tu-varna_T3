@@ -2,7 +2,11 @@ package Project.Commands;
 
 import java.util.Scanner;
 import java.util.Arrays;
-
+/**
+ * Interactive command loop that reads user input and dispatches commands.
+ * Parses simple commands and arguments, handles 'save as' specially.
+ * Manages application lifecycle and prints results or error messages.
+ */
 public class Engine {
     private final Context context;
     private final CommandExecution commandExecution;
@@ -15,7 +19,21 @@ public class Engine {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         this.context.setScanner(scanner);
-        System.out.println("Welcome! Please enter command:");
+        System.out.println("Welcome!Please enter command: \n" +
+                "Open. \n" +
+                "Close. \n" +
+                "Save. \n" +
+                "Save as. \n" +
+                "Help. \n" +
+                "Exit. \n" +
+                "Print. \n" +
+                "Select. \n" +
+                "Set. \n" +
+                "Children. \n" +
+                "Child. \n" +
+                "Text. \n" +
+                "Delete. \n" +
+                "Newchild");
 
         while (true) {
             System.out.print("> ");

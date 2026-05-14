@@ -8,6 +8,11 @@ import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
 import Project.Parts.XmlLoader;
+/**
+ * Retrieves the nth child element of a specified parent element.
+ * Validates numeric ids, checks for document presence and child bounds.
+ * Serializes the selected child element to XML for display.
+ */
 
 public class Child implements Command
 {

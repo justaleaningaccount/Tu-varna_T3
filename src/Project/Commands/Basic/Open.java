@@ -3,6 +3,11 @@ package Project.Commands.Basic;
 import Project.Commands.Context;
 import Project.Exceptions.NoElement;
 import Project.Interfaces.Command;
+/**
+ * Opens or references a file by name for subsequent operations.
+ * Validates that a filename argument is provided.
+ * Returns a confirmation message indicating the opened file.
+ */
 
 public class Open implements Command {
     @Override

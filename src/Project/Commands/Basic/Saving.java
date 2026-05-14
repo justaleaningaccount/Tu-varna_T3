@@ -2,6 +2,11 @@ package Project.Commands.Basic;
 import Project.Commands.Context;
 import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
+/**
+ * Saves the current in-memory document to the file referenced by context.
+ * Throws NoFile if no filename is set in the context.
+ * Delegates actual persistence to the configured SaveStorage implementation.
+ */
 
 public class Saving implements Command
 {

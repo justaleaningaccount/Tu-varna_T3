@@ -3,6 +3,11 @@ package Project.Commands.Basic;
 import Project.Commands.Context;
 import Project.Exceptions.WrongCommand;
 import Project.Interfaces.Command;
+/**
+ * Provides a multi-line help text describing available commands.
+ * Returns localized/help strings for the interactive console.
+ * Used by the engine to show usage information to the user.
+ */
 
 public class Help implements Command
 {
@@ -10,23 +15,22 @@ public class Help implements Command
     @Override
     public String execute(String[] args, Context context) throws WrongCommand {
         return  """
-                Commands : \n" +
-                "Open: Отваря файла със данни. \n" +
-                "Close: Затваря текущия файл. \n" +
-                "Save: Запазва текущия файл \n" +
-                "Save as : Запазва данните в нов файл \n" +
-                "Help: Помощ за приспособлението на различните команди \n +" +
-                "Exit: Затваря програмата \n" +
-                "Print: Извежда на екрана информацията от XML файла \n" +
-                "Select: Извежда стойност на атрибут по даден идентификатор на елемента и ключ на атрибута \n" +
-                "Set: Присвоява стойност на атрибут \n" +
-                "Children: Списък с атрибути на вложените елементи \n" +
-                "Child: Достъп до н-тия наследник на елемент \n" +
-                "Text: Достъп до текста на елемент \n" +
-                "Delete: Изтриване на атрибут на елемент по ключ \n" +
-                "Newchild: Добавяне на НОВ наследник на елемент. Новият елемент няма атрибути, освен идетификатор \n" +
-                "Xpath: операция за изпълнение на прости XPath 2.0 заявки към даден елемент,която връща списък от XML елементи
-                """;
+                Commands :help\s
+                "Open: Отваря файла със данни."\s
+                "Close: Затваря текущия файл."\s
+                "Save: Запазва текущия файл"\s
+                "Save as : Запазва данните в нов файл"\s
+                "Help: Помощ за приспособлението на различните команди"\s
+                "Exit: Затваря програмата"\s
+                "Print: Извежда на екрана информацията от XML файла"\s
+                "Select: Извежда стойност на атрибут по даден идентификатор на елемента и ключ на атрибута"\s
+                "Set: Присвоява стойност на атрибут"\s
+                "Children: Списък с атрибути на вложените елементи"\s
+                "Child: Достъп до н-тия наследник на елемент"\s
+                "Text: Достъп до текста на елемент"\s
+                "Delete: Изтриване на атрибут на елемент по ключ"
+                "Newchild: Добавяне на НОВ наследник на елемент. Новият елемент няма атрибути, освен идетификатор"
+               \s""";
     }
 
     @Override

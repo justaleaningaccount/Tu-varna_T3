@@ -3,6 +3,11 @@ package Project.Commands.Basic;
 import Project.Commands.Context;
 import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
+/**
+ * Closes the currently open file and clears the editor context.
+ * Throws NoFile when no file is open.
+ * Returns a confirmation message including the closed filename.
+ */
 
 public class Closing implements Command
 {

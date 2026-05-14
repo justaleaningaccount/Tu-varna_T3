@@ -2,6 +2,11 @@ package Project.Commands.Basic;
 
 import Project.Commands.Context;
 import Project.Interfaces.Command;
+/**
+ * Terminates the running JVM process immediately.
+ * Calls System.exit(0) and does not return to the caller.
+ * Intended for interactive use to stop the application.
+ */
 
 public class Exiting implements Command
 {

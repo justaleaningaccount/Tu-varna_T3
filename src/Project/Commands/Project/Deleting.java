@@ -7,8 +7,12 @@ import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
-
 import java.util.Map;
+/**
+ * Deletes an attribute from a specified element by key.
+ * Validates element id and attribute presence, throws on errors.
+ * Returns the removed attribute value or throws if not found.
+ */
 
 public class Deleting implements Command {
     public Deleting() {}

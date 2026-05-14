@@ -2,7 +2,11 @@ package Project.Parts;
 
 import java.io.*;
 import java.util.Map;
-
+/**
+ * Responsible for serializing and deserializing Element trees to/from XML text.
+ * Provides save, load, writeElement and helper methods for XML escaping.
+ * Used by SaveStorage and the interactive engine to persist documents.
+ */
 public class XmlLoader
 {
     private XmlLoader(){}

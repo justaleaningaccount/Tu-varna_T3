@@ -6,8 +6,12 @@ import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
-
 import java.util.Map;
+/**
+ * Sets or replaces an attribute value on a specified element.
+ * Validates arguments, finds the target element and updates its attributes.
+ * Returns a message indicating whether the attribute was set or replaced.
+ */
 
 public class Setting implements Command
 {

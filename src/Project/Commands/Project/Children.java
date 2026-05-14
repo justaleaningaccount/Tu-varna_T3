@@ -7,9 +7,13 @@ import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
-
 import java.util.List;
 import java.util.Map;
+/**
+ * Lists all children of a specified element with their attributes and ids.
+ * Validates input, finds the parent element and formats a readable listing.
+ * Returns a multi-line string describing each child and its attributes.
+ */
 
 public class Children implements Command
 {

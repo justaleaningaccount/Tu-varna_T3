@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * Represents an XML-like element node with attributes, children and text.
+ * Stores a map of id entries, a name, attributes map, children list and text.
+ * Provides helpers to add children, set attributes and obtain resolved id.
+ */
 public class Element
 {
     public Map<Integer,Integer> id = new LinkedHashMap<>();

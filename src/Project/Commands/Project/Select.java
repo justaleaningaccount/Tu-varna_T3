@@ -5,8 +5,12 @@ import Project.Exceptions.NoElement;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
-
 import java.util.Map;
+/**
+ * Selects and returns the value of a named attribute from an element.
+ * Validates element id and attribute key, throws descriptive exceptions.
+ * Useful for querying single attribute values from the document tree.
+ */
 
 public class Select implements Command
 {
@@ -58,6 +62,6 @@ public class Select implements Command
 
     @Override
     public String helpMsg() {
-        return "Извежда стойност на атрибут по даден идентификатор на елемента и ключ на атрибута";
+        return "Return a value based on the attribute id and key";
     }
 }

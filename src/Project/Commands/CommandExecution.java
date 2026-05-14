@@ -7,6 +7,11 @@ import Project.Interfaces.Command;
 
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * Registry and factory for available command implementations.
+ * Maps command names to Command instances and resolves requests.
+ * Throws WrongCommand for unknown or null command names.
+ */
 
 public class CommandExecution
 {

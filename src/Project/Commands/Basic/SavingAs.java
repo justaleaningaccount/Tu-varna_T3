@@ -4,6 +4,11 @@ import Project.Commands.Context;
 import Project.Exceptions.NoElement;
 import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
+/**
+ * Saves the current document under a new filename and updates context.
+ * Validates the provided filename argument and delegates to SaveStorage.
+ * Returns a confirmation message indicating the new filename.
+ */
 
 public class SavingAs implements Command {
 

@@ -8,6 +8,11 @@ import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
 import Project.Parts.IdMaker;
+/**
+ * Creates a new child element under a specified parent element.
+ * Generates a new resolved id using IdMaker and attaches the child.
+ * Returns the newly assigned resolved id as a string.
+ */
 
 public class NewChild implements Command {
 

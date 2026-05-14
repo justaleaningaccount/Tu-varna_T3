@@ -1,10 +1,12 @@
 package Project.Commands;
-
 import Project.Parts.Element;
 import Project.Parts.SaveStorage;
-
 import java.util.Scanner;
-
+/**
+ * Holds runtime state shared across commands: current element, filename, storage.
+ * Provides getters and setters for element, filename and SaveStorage.
+ * Used by Engine and Command implementations to access application state.
+ */
 
 public class Context
 {
@@ -48,6 +50,4 @@ public class Context
     public boolean hasOpenFile() {
         return filename != null && !filename.isEmpty();
     }
-
-
 }

@@ -2,7 +2,11 @@ package Project.Parts;
 
 import Project.Exceptions.BadIndex;
 import Project.Exceptions.WrongPlace;
-
+/**
+ * Lightweight XML parser that converts textual XML into Element objects.
+ * Implements a simple recursive-descent parser with basic error reporting.
+ * Handles attributes, nested elements and text nodes; throws WrongPlace on errors.
+ */
 public class XmlParser
 {
     private final String text;

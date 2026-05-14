@@ -1,6 +1,11 @@
 package Project.Parts;
 
 import java.util.List;
+/**
+ * Utility class to find an element by its resolved id within a tree.
+ * Performs a recursive depth-first search returning the first match.
+ * Returns null when the element is not present.
+ */
 
 public class FinderOfElem
 {
