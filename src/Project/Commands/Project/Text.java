@@ -9,7 +9,7 @@ import Project.Interfaces.Command;
 
 /**
  * Gets or sets the textContent of an Element identified by its resolved id.
- * Usage: `text <id>` returns the element's text; `text <id> <text...>` sets the text and confirms.
+ * Usage: `text id` returns the element's text; `text id text...` sets the text and confirms.
  */
 
 public class Text implements Command {
