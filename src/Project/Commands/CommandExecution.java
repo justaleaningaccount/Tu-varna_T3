@@ -33,6 +33,7 @@ public class CommandExecution
         commands.put("child",new Child());
         commands.put("children",new Children());
         commands.put("new child",new NewChild());
+        commands.put("text",new Text());
     }
     public Command getCommand(String commandName) {
         if (commandName == null) throw new WrongCommand("Wrong command. Use 'help' for help");
