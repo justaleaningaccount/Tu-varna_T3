@@ -28,8 +28,6 @@ public class SavingAs implements Command {
         }
         context.setFilename(filename);
 
-        context.setFilename(filename);
-
         try
         {
             context.getSaveStorage().saving(context.getElement(), filename);
