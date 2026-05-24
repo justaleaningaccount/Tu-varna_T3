@@ -22,13 +22,13 @@ public class Engine {
         System.out.println("Welcome!Please enter command: \n" +
                 "Open. \n" +
                 "Close. \n" +
-                "Save. \n" +
-                "Save as. \n" +
+                "Saving. \n" +
+                "Saving as. \n" +
                 "Help. \n" +
                 "Exit. \n" +
-                "Print. \n" +
+                "Printing. \n" +
                 "Select. \n" +
-                "Set. \n" +
+                "Setting. \n" +
                 "Children. \n" +
                 "Child. \n" +
                 "Text. \n" +
