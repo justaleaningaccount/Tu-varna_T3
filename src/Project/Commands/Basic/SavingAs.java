@@ -23,6 +23,11 @@ public class SavingAs implements Command {
         }
 
         String filename = args[0];
+        if (!filename.toLowerCase().endsWith(".xml")) {
+            filename += ".xml";
+        }
+        context.setFilename(filename);
+
         context.setFilename(filename);
 
         try

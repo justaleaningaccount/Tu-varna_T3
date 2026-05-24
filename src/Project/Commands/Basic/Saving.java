@@ -16,11 +16,13 @@ public class Saving implements Command
     public String execute(String[] args, Context context) throws NoFile
     {
         String filename = context.getFilename();
-        if (filename == null || filename.isEmpty())
-        {
+        if (filename == null || filename.isEmpty()) {
             throw new NoFile("No file is currently open.");
         }
-
+        if (!filename.toLowerCase().endsWith(".xml")) {
+            filename += ".xml";
+            context.setFilename(filename);
+        }
         try
         {
             context.getSaveStorage().saving(context.getElement(), filename);

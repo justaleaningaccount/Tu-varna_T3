@@ -16,26 +16,28 @@ public class Open implements Command {
         }
         
         String filename = args[0];
-
+        if (!filename.toLowerCase().endsWith(".xml")) {
+            filename += ".xml";
+        }
         try {
             File file = new File(filename);
-            Element rootElement;
+            Element root;
 
             if (file.exists()) {
-                rootElement = context.getSaveStorage().load(filename);
+                root = context.getSaveStorage().load(filename);
                 
-                if (rootElement == null) {
-                    rootElement = new Element("root");
-                    rootElement.id.put(0, 1);
+                if (root == null) {
+                    root = new Element("root");
+                    root.id.put(0, 1);
                 }
             } else {
-                rootElement = new Element("root");
-                rootElement.id.put(0, 1);
-                context.getSaveStorage().saving(rootElement, filename);
+                root = new Element("root");
+                root.id.put(0, 1);
+                context.getSaveStorage().saving(root, filename);
             }
 
             context.setFilename(filename);
-            context.setElement(rootElement);
+            context.setElement(root);
 
             return "Opened file " + filename;
 
