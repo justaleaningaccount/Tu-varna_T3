@@ -36,6 +36,10 @@ public class CommandExecution
         commands.put("text",new Text());
     }
     public Command getCommand(String commandName) {
+        if (commandName == null||commandName.trim().isEmpty())
+        {
+            throw new WrongCommand("Command cant be null or empty. Use 'help' for help");
+        }
         Command command = commands.get(commandName.toLowerCase());
 
         if (command == null)
