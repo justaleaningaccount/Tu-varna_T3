@@ -62,25 +62,22 @@ public class Setting implements Command
     }
 
     private static String getString(String[] args, String id, String key) {
-        if (id == null || id.isEmpty())
-        {
+        if (id == null || id.isEmpty()) {
             throw new NoElement("No element id.");
         }
-        if (key == null || key.isEmpty())
-        {
+        if (key == null || key.isEmpty()) {
             throw new NoElement("No attribute key.");
         }
+
         StringBuilder valueBuilder = new StringBuilder();
-        for (int i = 2; i < args.length; i++)
-        {
-            if (i > 2)
-            {
-                valueBuilder.append(" ");
-                valueBuilder.append(args[i]);
-            }
+        for (int i = 2; i < args.length; i++) {
+            if (i > 2) valueBuilder.append(" ");
+            valueBuilder.append(args[i]);
         }
-        return valueBuilder.toString();
+
+        return valueBuilder.toString().trim();
     }
+
 
     @Override
     public String helpMsg()

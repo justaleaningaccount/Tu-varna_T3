@@ -32,7 +32,7 @@ public class CommandExecution
         commands.put("deleting", new Deleting());
         commands.put("child",new Child());
         commands.put("children",new Children());
-        commands.put("new child",new NewChild());
+        commands.put("newchild",new NewChild());
         commands.put("text",new Text());
     }
     public Command getCommand(String commandName) {
