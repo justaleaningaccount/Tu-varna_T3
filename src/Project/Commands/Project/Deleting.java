@@ -63,7 +63,7 @@ public class Deleting implements Command {
             throw new NoElement("Attribute '" + attribute + "' cant be found om element with id " + target);
         }
 
-        return att.remove(attribute);
+        return "Deleted attribute " + att.remove(attribute);
     }
 
     @Override

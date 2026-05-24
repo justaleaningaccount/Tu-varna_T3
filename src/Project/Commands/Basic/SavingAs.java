@@ -4,21 +4,21 @@ import Project.Commands.Context;
 import Project.Exceptions.NoElement;
 import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
+import java.io.File;
+
 /**
  * Saves the current document under a new filename and updates context.
+ * If the file already exists, it overwrites it.
  * Validates the provided filename argument and delegates to SaveStorage.
  * Returns a confirmation message indicating the new filename.
  */
-
 public class SavingAs implements Command {
 
     public SavingAs() {}
 
     @Override
-    public String execute(String[] args, Context context) throws NoFile
-    {
-        if (args == null || args.length < 1 || args[0] == null || args[0].isEmpty())
-        {
+    public String execute(String[] args, Context context) throws NoFile {
+        if (args == null || args.length < 1 || args[0] == null || args[0].isEmpty()) {
             throw new NoElement("Too little arguments");
         }
 
@@ -26,22 +26,27 @@ public class SavingAs implements Command {
         if (!filename.toLowerCase().endsWith(".xml")) {
             filename += ".xml";
         }
+
+        String oldFilename = context.getFilename();
+        File oldFile = oldFilename != null ? new File(oldFilename) : null;
+        File newFile = new File(filename);
+
+        if (oldFile != null && oldFile.exists() && !oldFile.getName().equals(newFile.getName())) {
+            oldFile.renameTo(newFile);
+        }
+
         context.setFilename(filename);
 
-        try
-        {
+        try {
             context.getSaveStorage().saving(context.getElement(), filename);
-        }
-        catch (Exception e)
-        {
+            return "Saving as " + filename;
+        } catch (Exception e) {
             throw new NoFile("Error saving file: " + e.getMessage());
         }
-        return "Saved as " + filename;
     }
 
     @Override
-    public String helpMsg()
-    {
-        return "Save in specific file";
+    public String helpMsg() {
+        return "Save as specific file.";
     }
 }

@@ -53,7 +53,7 @@ public class Setting implements Command
         String prev = attribute.put(att, value);
         if (prev == null)
         {
-            return "Set attribute to'" + att + "' = \"" + value + "\"" + idNeeded;
+            return "Set attribute to'" + att + "' = \"" + value + "\"";
         }
         else
         {

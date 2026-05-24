@@ -21,9 +21,9 @@ public class Engine {
         this.context.setScanner(scanner);
         System.out.println("Welcome!Please enter command: \n" +
                 "Open. \n" +
-                "Close. \n" +
-                "Saving. \n" +
-                "Saving as. \n" +
+                "Closing. \n" +
+                "Save. \n" +
+                "SavingAs. \n" +
                 "Help. \n" +
                 "Exit. \n" +
                 "Printing. \n" +
@@ -55,11 +55,12 @@ public class Engine {
                 String commandName;
                 String[] args;
 
-                if (input.toLowerCase().startsWith("save as")) {
-                    commandName = "saving as";
-                    String rest = input.substring(7).trim();
+                if (input.toLowerCase().startsWith("saving as")) {
+                    commandName = "savingAs";
+                    String rest = input.substring(9).trim(); // skip "saving as"
                     args = rest.isEmpty() ? new String[0] : new String[] { rest.replace("\"", "") };
-                } else {
+                }
+                 else {
                     String[] parts = input.split("\\s+");
                     commandName = parts[0];
                     args = parts.length > 1 ? Arrays.copyOfRange(parts, 1, parts.length) : new String[0];

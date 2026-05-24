@@ -21,9 +21,9 @@ public class CommandExecution
         this.commands = new HashMap<>();
         commands.put("exiting", new Exiting());
         commands.put("help", new Help());
-        commands.put("saving", new Saving());
+        commands.put("save", new Saving());
         commands.put("open", new Open());
-        commands.put("savingAs", new SavingAs());
+        commands.put("savingas", new SavingAs());
         commands.put("closing", new Closing());
 
         commands.put("select", new Select());

@@ -43,7 +43,7 @@ public class Text implements Command {
 
         if (args.length == 1) {
             String text = found.getTextContent();
-            return text == null ? "" : text;
+            return text == null ? "No text" : text;
         }
 
 

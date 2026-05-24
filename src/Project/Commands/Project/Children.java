@@ -61,7 +61,7 @@ public class Children implements Command {
         if (children == null || children.isEmpty()) return;
 
         for (Element child : children) {
-            sb.append("  ".repeat(depth)); // indentation for hierarchy
+            sb.append("  ".repeat(depth));
             sb.append("- ").append(child.getName());
             Integer id = child.getResolvedId();
             if (id != null) sb.append(" (id=").append(id).append(")");

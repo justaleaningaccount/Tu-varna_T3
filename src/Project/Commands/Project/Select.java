@@ -49,7 +49,7 @@ public class Select implements Command
 
         Element found = FinderOfElem.findByResolvedId(element, targetId);
         if (found == null) {
-            throw new NoElement("No element with" + targetId + " found.");
+            throw new NoElement("No element with id" + targetId + " found.");
         }
 
         Map<String, String> attribute = found.getAttributes();
