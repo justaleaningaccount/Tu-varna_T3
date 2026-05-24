@@ -43,10 +43,7 @@ public class Context
     public void setSaveStorage(SaveStorage saveStorage) {
         this.saveStorage = saveStorage;
     }
-    public void setScanner(Scanner scanner)
-    {
-
-    }
+    public void setScanner(Scanner scanner) {}
     public boolean hasOpenFile() {
         return filename != null && !filename.isEmpty();
     }
