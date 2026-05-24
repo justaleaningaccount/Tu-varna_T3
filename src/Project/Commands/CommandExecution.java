@@ -36,7 +36,6 @@ public class CommandExecution
         commands.put("text",new Text());
     }
     public Command getCommand(String commandName) {
-        if (commandName == null) throw new WrongCommand("Wrong command. Use 'help' for help");
         Command command = commands.get(commandName.toLowerCase());
 
         if (command == null)
