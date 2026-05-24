@@ -44,7 +44,5 @@ public class Context
         this.saveStorage = saveStorage;
     }
     public void setScanner(Scanner scanner) {}
-    public boolean hasOpenFile() {
-        return filename != null && !filename.isEmpty();
-    }
+
 }
