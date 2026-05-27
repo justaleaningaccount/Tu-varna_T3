@@ -1,0 +1,6 @@
+<root id="1" color="red">
+  Text
+  <element id="2" color="yellow" shape="triangle">
+    <element id="3"/>
+  </element>
+</root>
