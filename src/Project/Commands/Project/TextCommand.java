@@ -12,7 +12,7 @@ import Project.Interfaces.Command;
  * Usage: `text id` returns the element's text; `text id text...` sets the text and confirms.
  */
 
-public class Text implements Command {
+public class TextCommand implements Command {
     @Override
     public String execute(String[] args, Context context) throws NoElement {
         if (args == null || args.length < 1) {

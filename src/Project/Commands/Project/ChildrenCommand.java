@@ -15,9 +15,9 @@ import java.util.Map;
  * Validates input, finds the parent element and formats a readable hierarchical listing.
  * Returns a multi-line string describing each child and its attributes.
  */
-public class Children implements Command {
+public class ChildrenCommand implements Command {
 
-    public Children() {}
+    public ChildrenCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoElement {

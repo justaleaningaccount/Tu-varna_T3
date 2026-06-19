@@ -19,22 +19,22 @@ public class CommandExecution
     public CommandExecution()
     {
         this.commands = new HashMap<>();
-        commands.put("exiting", new Exiting());
-        commands.put("help", new Help());
-        commands.put("save", new Saving());
-        commands.put("open", new Open());
-        commands.put("savingas", new SavingAs());
-        commands.put("closing", new Closing());
+        commands.put("exiting", new ExitingCommand());
+        commands.put("help", new HelpCommand());
+        commands.put("save", new SavingCommand());
+        commands.put("open", new OpenCommand());
+        commands.put("savingas", new SavingAsCommand());
+        commands.put("closing", new ClosingCommand());
 
-        commands.put("select", new Select());
-        commands.put("printing", new Printing());
-        commands.put("setting", new Setting());
-        commands.put("deleting", new Deleting());
-        commands.put("child",new Child());
-        commands.put("children",new Children());
-        commands.put("newchild", new NewChild());
-        commands.put("new child", new NewChild());
-        commands.put("text",new Text());
+        commands.put("select", new SelectCommand());
+        commands.put("printing", new PrintingCommand());
+        commands.put("setting", new SettingCommand());
+        commands.put("deleting", new DeletingCommand());
+        commands.put("child",new ChildCommand());
+        commands.put("children",new ChildrenCommand());
+        commands.put("newchild", new NewChildCommand());
+        commands.put("new child", new NewChildCommand());
+        commands.put("text",new TextCommand());
     }
     public Command getCommand(String commandName) {
         if (commandName == null || commandName.trim().isEmpty())

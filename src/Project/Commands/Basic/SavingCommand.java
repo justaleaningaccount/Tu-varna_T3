@@ -8,9 +8,9 @@ import Project.Interfaces.Command;
  * Delegates actual persistence to the configured SaveStorage implementation.
  */
 
-public class Saving implements Command
+public class SavingCommand implements Command
 {
-    public Saving() {}
+    public SavingCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoFile

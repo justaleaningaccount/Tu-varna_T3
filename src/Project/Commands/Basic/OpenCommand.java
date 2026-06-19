@@ -7,7 +7,7 @@ import Project.Interfaces.Command;
 import Project.Parts.Element;
 import java.io.File;
 
-public class Open implements Command {
+public class OpenCommand implements Command {
     
     @Override
     public String execute(String[] args, Context context) throws NoElement {
@@ -25,16 +25,17 @@ public class Open implements Command {
 
             if (file.exists()) {
                 root = context.getSaveStorage().load(filename);
-                
+
                 if (root == null) {
                     root = new Element("root");
-                    root.id.put(0, 1);
+                    root.id = 1;
                 }
             } else {
                 root = new Element("root");
-                root.id.put(0, 1);
+                root.id = 1;
                 context.getSaveStorage().saving(root, filename);
             }
+
 
             context.setFilename(filename);
             context.setElement(root);

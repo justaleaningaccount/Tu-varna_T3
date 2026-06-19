@@ -12,9 +12,9 @@ import java.io.File;
  * Validates the provided filename argument and delegates to SaveStorage.
  * Returns a confirmation message indicating the new filename.
  */
-public class SavingAs implements Command {
+public class SavingAsCommand implements Command {
 
-    public SavingAs() {}
+    public SavingAsCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoFile {

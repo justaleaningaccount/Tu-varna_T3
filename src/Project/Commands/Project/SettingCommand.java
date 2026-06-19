@@ -13,7 +13,7 @@ import java.util.Map;
  * Returns a message indicating whether the attribute was set or replaced.
  */
 
-public class Setting implements Command
+public class SettingCommand implements Command
 {
     @Override
     public String execute(String[] args, Context context) throws NoElement

@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Element
 {
-    public Map<Integer,Integer> id = new LinkedHashMap<>();
+    public int id;
     private String name;
     private Map<String,String> attributes = new LinkedHashMap<>();
     private List<Element> children = new ArrayList<>();
@@ -45,9 +45,9 @@ public class Element
 
 
     public Integer getResolvedId() {
-        if (id.isEmpty()) return null;
-        return id.values().iterator().next();
+        return id == 0 ? null : id;
     }
+
 
     @Override
     public String toString() {

@@ -14,9 +14,9 @@ import Project.Parts.IdMaker;
  * Returns the newly assigned resolved id as a string.
  */
 
-public class NewChild implements Command {
+public class NewChildCommand implements Command {
 
-    public NewChild() {}
+    public NewChildCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoElement {
@@ -48,7 +48,7 @@ public class NewChild implements Command {
         Element parent = FinderOfElem.findByResolvedId(root, parentIds);
         Element child = getElement(args, parent, parentIds);
         int newId = IdMaker.nextResolvedId(root);
-        child.id.put(0, newId);
+        child.id = newId;
         parent.addChild(child);
 
         return String.valueOf(newId);

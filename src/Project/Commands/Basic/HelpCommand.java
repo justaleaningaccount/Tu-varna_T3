@@ -9,12 +9,12 @@ import Project.Interfaces.Command;
  * Used by the engine to show usage information to the user.
  */
 
-public class Help implements Command
+public class HelpCommand implements Command
 {
 
     @Override
     public String execute(String[] args, Context context) throws WrongCommand {
-        return  """
+        return """
                 Commands :help\s
                 "Open: Отваря файла със данни."\s
                 "Close: Затваря текущия файл."\s

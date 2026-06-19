@@ -8,9 +8,9 @@ import Project.Interfaces.Command;
  * Intended for interactive use to stop the application.
  */
 
-public class Exiting implements Command
+public class ExitingCommand implements Command
 {
-    public Exiting(){}
+    public ExitingCommand(){}
 
     @Override
     public String execute(String[] args, Context context)

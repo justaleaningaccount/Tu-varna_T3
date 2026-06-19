@@ -12,9 +12,9 @@ import java.util.Map;
  * Useful for querying single attribute values from the document tree.
  */
 
-public class Select implements Command
+public class SelectCommand implements Command
 {
-    public Select() {}
+    public SelectCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoElement

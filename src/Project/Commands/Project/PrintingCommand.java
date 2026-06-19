@@ -11,9 +11,9 @@ import Project.Parts.XmlLoader;
  * Uses XmlLoader.writeElement to produce the textual representation.
  */
 
-public class Printing implements Command {
+public class PrintingCommand implements Command {
 
-    public Printing() {}
+    public PrintingCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoElement

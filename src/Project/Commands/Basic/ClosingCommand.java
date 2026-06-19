@@ -9,9 +9,9 @@ import Project.Interfaces.Command;
  * Returns a confirmation message including the closed filename.
  */
 
-public class Closing implements Command
+public class ClosingCommand implements Command
 {
-    public Closing() {}
+    public ClosingCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoFile
@@ -28,7 +28,7 @@ public class Closing implements Command
     }
 
     @Override
-    public String helpMsg() {
+    public  String helpMsg() {
         return "Closes file\n";
     }
 }

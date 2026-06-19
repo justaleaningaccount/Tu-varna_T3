@@ -47,8 +47,7 @@ public class XmlParser
             {
                 try
                 {
-                    int idVal = Integer.parseInt(attrValue);
-                    e.id.put(0, idVal);
+                    e.id = Integer.parseInt(attrValue);
                 }
                 catch (NumberFormatException ignored) {}
             }

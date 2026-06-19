@@ -14,9 +14,9 @@ import Project.Parts.XmlLoader;
  * Serializes the selected child element to XML for display.
  */
 
-public class Child implements Command
+public class ChildCommand implements Command
 {
-    public Child() {}
+    public ChildCommand() {}
     @Override
     public String execute(String[] args, Context context) throws NoElement
     {

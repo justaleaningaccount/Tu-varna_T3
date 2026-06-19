@@ -14,8 +14,8 @@ import java.util.Map;
  * Returns the removed attribute value or throws if not found.
  */
 
-public class Deleting implements Command {
-    public Deleting() {}
+public class DeletingCommand implements Command {
+    public DeletingCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoElement

@@ -84,7 +84,7 @@ public class Engine {
         Engine engine = new Engine(ctx, execution);
 
         Project.Parts.Element root = new Project.Parts.Element("root");
-        root.id.put(0, 1);
+        root.id = 1;
         ctx.setElement(root);
 
         engine.run();
