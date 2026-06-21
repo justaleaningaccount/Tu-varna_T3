@@ -5,7 +5,6 @@ import Project.Exceptions.NoElement;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
-import java.util.Map;
 /**
  * Selects and returns the value of a named attribute from an element.
  * Validates element id and attribute key, throws descriptive exceptions.
@@ -44,21 +43,20 @@ public class SelectCommand implements Command
         {
             targetId = Integer.parseInt(id);
         } catch (Exception e) {
-            throw new BadIndex("Id of an element must a number.");
+            throw new BadIndex("Id of an element must be a number.");
         }
 
         Element found = FinderOfElem.findByResolvedId(element, targetId);
         if (found == null) {
-            throw new NoElement("No element with id" + targetId + " found.");
+            throw new NoElement("No element with id " + targetId + " found.");
         }
 
-        Map<String, String> attribute = found.getAttributes();
-        if (!attribute.containsKey(att)) {
+        String value = found.getAttribute(att);
+        if (value == null) {
             throw new NoElement("Attribute '" + att + "' was not found on element with id " + targetId);
         }
-        return attribute.get(att);
+        return value;
     }
-
 
     @Override
     public String helpMsg() {

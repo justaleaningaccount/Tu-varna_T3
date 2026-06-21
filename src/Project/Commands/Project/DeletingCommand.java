@@ -7,7 +7,7 @@ import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
-import java.util.Map;
+
 /**
  * Deletes an attribute from a specified element by key.
  * Validates element id and attribute presence, throws on errors.
@@ -18,10 +18,8 @@ public class DeletingCommand implements Command {
     public DeletingCommand() {}
 
     @Override
-    public String execute(String[] args, Context context) throws NoElement
-    {
-        if (args == null || args.length < 2)
-        {
+    public String execute(String[] args, Context context) throws NoElement {
+        if (args == null || args.length < 2) {
             throw new NoElement("Too little arguments.");
         }
 
@@ -36,39 +34,33 @@ public class DeletingCommand implements Command {
         }
 
         Element ele = context.getElement();
-        if (ele == null)
-        {
+        if (ele == null) {
             throw new NoFile("No document.");
         }
 
         int target;
-        try
-        {
+        try {
             target = Integer.parseInt(id);
-        }
-        catch (Exception e)
-        {
-            throw new BadIndex("Id must an number");
+        } catch (Exception e) {
+            throw new BadIndex("Id must be a number");
         }
 
         Element target1 = FinderOfElem.findByResolvedId(ele, target);
-        if (target1 == null)
-        {
-            throw new NoElement("No elem with" + target + " found.");
+        if (target1 == null) {
+            throw new NoElement("No elem with " + target + " found.");
         }
 
-        Map<String, String> att = target1.getAttributes();
-        if (!att.containsKey(attribute))
-        {
-            throw new NoElement("Attribute '" + attribute + "' cant be found om element with id " + target);
+        String existing = target1.getAttribute(attribute);
+        if (existing == null) {
+            throw new NoElement("Attribute '" + attribute + "' can't be found on element with id " + target);
         }
 
-        return "Deleted attribute " + att.remove(attribute);
+        String removed = target1.removeAttribute(attribute);
+        return "Deleted attribute " + removed;
     }
 
     @Override
-    public String helpMsg()
-    {
+    public String helpMsg() {
         return "Deletes an attribute of an element by key";
     }
 }

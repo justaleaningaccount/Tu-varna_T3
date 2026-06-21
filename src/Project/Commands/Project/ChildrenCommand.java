@@ -5,10 +5,11 @@ import Project.Exceptions.BadIndex;
 import Project.Exceptions.NoElement;
 import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
+import Project.Parts.Attribute;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Lists all children (including nested descendants) of a specified element.
@@ -67,12 +68,13 @@ public class ChildrenCommand implements Command {
             if (id != null) sb.append(" (id=").append(id).append(")");
             sb.append(" - attributes: ");
 
-            Map<String, String> att = child.getAttributes();
+            // Use the Element API that returns a Set<Attribute>
+            Set<Attribute> att = child.getAttributesSet();
             if (att == null || att.isEmpty()) {
                 sb.append("none");
             } else {
                 boolean first = true;
-                for (Map.Entry<String, String> a : att.entrySet()) {
+                for (Attribute a : att) {
                     if (!first) sb.append(", ");
                     sb.append(a.getKey()).append("=\"").append(a.getValue()).append("\"");
                     first = false;

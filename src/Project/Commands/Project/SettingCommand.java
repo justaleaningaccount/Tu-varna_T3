@@ -6,7 +6,6 @@ import Project.Exceptions.NoFile;
 import Project.Interfaces.Command;
 import Project.Parts.Element;
 import Project.Parts.FinderOfElem;
-import java.util.Map;
 /**
  * Sets or replaces an attribute value on a specified element.
  * Validates arguments, finds the target element and updates its attributes.
@@ -48,12 +47,10 @@ public class SettingCommand implements Command
         {
             throw new NoElement("No element with " + idNeeded + " found.");
         }
-
-        Map<String, String> attribute = target.getAttributes();
-        String prev = attribute.put(att, value);
+        String prev = target.setAttribute(att, value);
         if (prev == null)
         {
-            return "Set attribute to'" + att + "' = \"" + value + "\"";
+            return "Set attribute '" + att + "' = \"" + value + "\"";
         }
         else
         {
@@ -77,7 +74,6 @@ public class SettingCommand implements Command
 
         return valueBuilder.toString().trim();
     }
-
 
     @Override
     public String helpMsg()

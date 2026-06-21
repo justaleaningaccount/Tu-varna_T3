@@ -1,7 +1,8 @@
 package Project.Parts;
 
 import java.io.*;
-import java.util.Map;
+import java.util.Set;
+
 /**
  * Responsible for serializing and deserializing Element trees to/from XML text.
  * Provides save, load, writeElement and helper methods for XML escaping.
@@ -40,9 +41,13 @@ public class XmlLoader
         sb.append(s).append("<").append(xmlName(elem.getName()));
         Integer id = elem.getResolvedId();
         if (id != null) sb.append(" id=\"").append(id).append("\"");
-        for (Map.Entry<String, String> a : elem.getAttributes().entrySet())
-        {
-            sb.append(" ").append(xmlName(a.getKey())).append("=\"").append(xmlAttr(a.getValue())).append("\"");
+
+        Set<Attribute> attrs = elem.getAttributesSet();
+        if (attrs != null && !attrs.isEmpty()) {
+            for (Attribute a : attrs) {
+                sb.append(" ").append(xmlName(a.getKey()))
+                        .append("=\"").append(xmlAttr(a.getValue())).append("\"");
+            }
         }
 
         boolean hasChildren = elem.getChildren() != null && !elem.getChildren().isEmpty();
