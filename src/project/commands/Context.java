@@ -1,0 +1,48 @@
+package project.commands;
+import project.parts.Element;
+import project.parts.SaveStorage;
+import java.util.Scanner;
+/**
+ * Holds runtime state shared across commands: current element, filename, storage.
+ * Provides getters and setters for element, filename and SaveStorage.
+ * Used by Engine and Command implementations to access application state.
+ */
+
+public class Context
+{
+    private Element element;
+    private String filename;
+    private SaveStorage saveStorage;
+
+    public Context(SaveStorage saveStorage) {
+        this.element = null;
+        this.filename = null;
+        this.saveStorage = saveStorage;
+    }
+
+    public Element getElement() {
+        return element;
+    }
+
+    public void setElement(Element element) {
+        this.element = element;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public SaveStorage getSaveStorage() {
+        return saveStorage;
+    }
+
+    public void setSaveStorage(SaveStorage saveStorage) {
+        this.saveStorage = saveStorage;
+    }
+    public void setScanner(Scanner scanner) {}
+
+}
