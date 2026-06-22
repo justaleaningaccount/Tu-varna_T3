@@ -58,7 +58,7 @@ public class SettingCommand implements Command
         }
     }
 
-    private static String getString(String[] args, String id, String key) {
+    private String getString(String[] args, String id, String key) {
         if (id == null || id.isEmpty()) {
             throw new NoElement("No element id.");
         }

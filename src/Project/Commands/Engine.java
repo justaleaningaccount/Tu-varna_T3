@@ -1,5 +1,8 @@
 package Project.Commands;
 
+import Project.Parts.SaveStorage;
+import Project.Parts.XmlLoader;
+
 import java.util.Scanner;
 import java.util.Arrays;
 /**
@@ -79,9 +82,11 @@ public class Engine {
     }
 
     public static void main(String[] args) {
-        CommandExecution execution = new CommandExecution();
-        Context ctx = new Context(new Project.Parts.SaveStorage());
-        Engine engine = new Engine(ctx, execution);
+        XmlLoader loader = new XmlLoader();
+        SaveStorage storage = new SaveStorage(loader);
+        Context ctx = new Context(storage);
+        CommandExecution exec = new CommandExecution();
+        Engine engine = new Engine(ctx, exec);
 
         Project.Parts.Element root = new Project.Parts.Element("root");
         root.id = 1;

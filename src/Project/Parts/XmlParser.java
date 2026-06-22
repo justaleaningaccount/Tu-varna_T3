@@ -9,33 +9,30 @@ import Project.Exceptions.WrongPlace;
  */
 public class XmlParser
 {
-    private final String text;
+    private String text;
     private int pos = 0;
-    private final int length;
+    private int length;
+    private XmlLoader loader;
 
-    public XmlParser(String text)
-    {
+    public XmlParser(String text, XmlLoader loader) {
         this.text = text == null ? "" : text;
         this.length = this.text.length();
+        this.loader = loader;
     }
 
-    public Element parseElement() throws WrongPlace
-    {
+    public Element parseElement() throws WrongPlace {
         skipWhitespace();
-        if (!peekStarting("<"))
-        {
+        if (!peekStarting("<")) {
             throw new WrongPlace("Expected '<' at position " + pos);
         }
         expect('<');
         String tagName = parseName();
         Element e = new Element(tagName);
 
-        while (true)
-        {
+        while (true) {
             skipWhitespace();
             char c = peek();
-            if (c == '/' || c == '>')
-            {
+            if (c == '/' || c == '>') {
                 break;
             }
             String attrName = parseName();
@@ -43,149 +40,112 @@ public class XmlParser
             expect('=');
             skipWhitespace();
             String attrValue = quotedValue();
-            if ("id".equals(attrName))
-            {
-                try
-                {
+            if ("id".equals(attrName)) {
+                try {
                     e.id = Integer.parseInt(attrValue);
-                }
-                catch (NumberFormatException ignored) {}
-            }
-            else
-            {
+                } catch (NumberFormatException ignored) { }
+            } else {
                 e.setAttribute(attrName, attrValue);
             }
         }
+
         skipWhitespace();
-        if (peek() == '/')
-        {
+        if (peek() == '/') {
             expect('/');
             expect('>');
             return e;
         }
         expect('>');
+
         StringBuilder content = new StringBuilder();
-        while (true)
-        {
+        while (true) {
             skipWhitespaceButBetter();
-            if (peekStarting("</"))
-            {
+            if (peekStarting("</")) {
                 expect('<');
                 expect('/');
                 parseName();
                 skipWhitespace();
                 expect('>');
                 break;
-            }
-            else if (peekStarting("<"))
-            {
+            } else if (peekStarting("<")) {
                 Element child = parseElement();
                 e.addChild(child);
-            }
-            else
-            {
-                String text = parseTextNode();
-                if (text != null && !text.isBlank())
-                {
-                    if (!content.isEmpty())
-                    {
-                        content.append(" ");
-                    }
-                    content.append(text.trim());
+            } else {
+                String textNode = parseTextNode();
+                if (textNode != null && !textNode.isBlank()) {
+                    if (!content.isEmpty()) content.append(" ");
+                    content.append(textNode.trim());
                 }
             }
         }
+
         if (!content.isEmpty()) e.setTextContent(content.toString());
         return e;
     }
-    private String parseTextNode()
-    {
+
+    private String parseTextNode() {
         int start = pos;
-        while (pos < length && text.charAt(pos) != '<')
-        {
-            pos++;
-        }
-        if (pos > start)
-        {
-            return XmlLoader.xmlSymbols(text.substring(start, pos));
+        while (pos < length && text.charAt(pos) != '<') pos++;
+        if (pos > start) {
+            return loader.xmlSymbols(text.substring(start, pos));
         }
         return null;
     }
 
-    private String parseName() throws WrongPlace
-    {
+    private String parseName() throws WrongPlace {
         skipWhitespace();
         int start = pos;
-        while (pos < length)
-        {
+        while (pos < length) {
             char c = text.charAt(pos);
             if (Character.isWhitespace(c) || c == '=' || c == '>' || c == '/' || c == '<') break;
             pos++;
         }
-        if (pos == start)
-        {
+        if (pos == start) {
             throw new WrongPlace("Expected name at " + pos);
         }
         return text.substring(start, pos);
     }
 
-    private String quotedValue() throws WrongPlace
-    {
+    private String quotedValue() throws WrongPlace {
         skipWhitespace();
         char ch = peek();
-        if (ch != '"' && ch != '\'')
-        {
+        if (ch != '"' && ch != '\'') {
             throw new WrongPlace("Expected attribute value at " + pos);
         }
         pos++;
         int start = pos;
-        while (pos < length && text.charAt(pos) != ch)
-        {
-            pos++;
-        }
-        if (pos >= length)
-        {
+        while (pos < length && text.charAt(pos) != ch) pos++;
+        if (pos >= length) {
             throw new BadIndex("Bad attribute value");
         }
         String val = text.substring(start, pos);
         pos++;
-        return XmlLoader.xmlSymbols(val);
+        return loader.xmlSymbols(val);
     }
 
-    private void skipWhitespace()
-    {
-        while (pos < length && Character.isWhitespace(text.charAt(pos)))
-        {
-            pos++;
+    private void skipWhitespace() {
+        while (pos < length && Character.isWhitespace(text.charAt(pos))) pos++;
+    }
+
+    private void skipWhitespaceButBetter() {
+        while (pos < length) {
+            char c = text.charAt(pos);
+            if (c == ' ' || c == '\t' || c == '\r' || c == '\n') pos++;
+            else break;
         }
     }
 
-    private void skipWhitespaceButBetter()
-    {
-        while (pos < length && (text.charAt(pos) == ' ' || text.charAt(pos) == '\t' || text.charAt(pos) == '\r' || text.charAt(pos) == '\n'))
-        {
-            pos++;
-        }
-    }
-
-    private char peek()
-    {
-        if (pos >= length)
-        {
-            return (char) - 1;
-        }
+    private char peek() {
+        if (pos >= length) return (char) -1;
         return text.charAt(pos);
     }
 
-    private boolean peekStarting(String s)
-    {
+    private boolean peekStarting(String s) {
         return text.regionMatches(pos, s, 0, s.length());
     }
 
-    private void expect(char c) throws WrongPlace
-    {
-        if (pos >= length || text.charAt(pos) != c)
-        {
+    private void expect(char c) throws WrongPlace {
+        if (pos >= length || text.charAt(pos) != c) {
             throw new WrongPlace("Expected '" + c + "' at position " + pos);
         }
         pos++;

@@ -25,7 +25,8 @@ public class PrintingCommand implements Command {
         }
 
         StringBuilder sb = new StringBuilder();
-        XmlLoader.writeElement(element, sb, 0);
+        XmlLoader loader = new XmlLoader();
+        loader.writeElement(element, sb, 0);
         return sb.toString();
     }
     @Override

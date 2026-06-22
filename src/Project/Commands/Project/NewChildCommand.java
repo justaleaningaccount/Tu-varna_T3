@@ -54,7 +54,7 @@ public class NewChildCommand implements Command {
         return String.valueOf(newId);
     }
 
-    private static Element getElement(String[] args, Element parent, int parentIds)
+    private Element getElement(String[] args, Element parent, int parentIds)
     {
         if (parent == null)
         {

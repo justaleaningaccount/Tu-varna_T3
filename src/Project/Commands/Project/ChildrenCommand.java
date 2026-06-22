@@ -57,7 +57,7 @@ public class ChildrenCommand implements Command {
         return sb.toString();
     }
 
-    private static void listChildren(Element parent, StringBuilder sb, int depth) {
+    private void listChildren(Element parent, StringBuilder sb, int depth) {
         List<Element> children = parent.getChildren();
         if (children == null || children.isEmpty()) return;
 
@@ -67,8 +67,6 @@ public class ChildrenCommand implements Command {
             Integer id = child.getResolvedId();
             if (id != null) sb.append(" (id=").append(id).append(")");
             sb.append(" - attributes: ");
-
-            // Use the Element API that returns a Set<Attribute>
             Set<Attribute> att = child.getAttributesSet();
             if (att == null || att.isEmpty()) {
                 sb.append("none");

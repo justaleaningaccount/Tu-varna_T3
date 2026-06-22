@@ -74,7 +74,8 @@ public class ChildCommand implements Command
         Element element = e.getChildren().get(index - 1);
 
         StringBuilder sb = new StringBuilder();
-        XmlLoader.writeElement(element, sb, 0);
+        XmlLoader loader = new XmlLoader();
+        loader.writeElement(element, sb, 0);
         return sb.toString();
     }
 

@@ -6,14 +6,19 @@ import Project.Interfaces.FileManager;
  * Provides a simple persistence adapter used by Context and Engine.
  */
 public class SaveStorage implements FileManager {
-    @Override
-    public Element load(String filename) throws Exception {
-        return XmlLoader.load(filename);
+    private final XmlLoader loader;
+
+    public SaveStorage(XmlLoader loader) {
+        this.loader = loader;
     }
 
     @Override
-    public void saving(Element element, String filename) throws Exception
-    {
-        XmlLoader.save(element,filename);
+    public Element load(String filename) throws Exception {
+        return loader.load(filename);
+    }
+
+    @Override
+    public void saving(Element element, String filename) throws Exception {
+        loader.save(element, filename);
     }
 }
