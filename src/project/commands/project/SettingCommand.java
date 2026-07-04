@@ -14,6 +14,14 @@ import project.parts.FinderOfElem;
 
 public class SettingCommand implements Command
 {
+    private FinderOfElem finder;
+
+    public SettingCommand(FinderOfElem finder) {
+        this.finder = finder;
+    }
+
+    public SettingCommand() {}
+
     @Override
     public String execute(String[] args, Context context) throws NoElement
     {
@@ -42,7 +50,7 @@ public class SettingCommand implements Command
             throw new BadIndex("Id must be a number");
         }
 
-        Element target = FinderOfElem.findByResolvedId(root, idNeeded);
+        Element target = finder.findByResolvedId(root, idNeeded);
         if (target == null)
         {
             throw new NoElement("No element with " + idNeeded + " found.");

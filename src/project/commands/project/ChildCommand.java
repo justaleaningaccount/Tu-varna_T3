@@ -16,6 +16,14 @@ import project.parts.XmlLoader;
 
 public class ChildCommand implements Command
 {
+    private FinderOfElem finder;
+    private XmlLoader loader;
+
+    public ChildCommand(XmlLoader loader, FinderOfElem finder) {
+        this.loader = loader;
+        this.finder = finder;
+    }
+
     public ChildCommand() {}
     @Override
     public String execute(String[] args, Context context) throws NoElement
@@ -55,7 +63,7 @@ public class ChildCommand implements Command
         index = Integer.parseInt(child);
         if (index < 1) throw new BadIndex("Id must be < 1");
 
-        Element e = FinderOfElem.findByResolvedId(root, parentId);
+        Element e = finder.findByResolvedId(root, parentId);
         if (e == null)
         {
             throw new NoElement("No element with " + parentId + " found.");

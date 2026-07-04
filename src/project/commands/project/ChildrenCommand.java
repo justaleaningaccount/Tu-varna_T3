@@ -8,6 +8,8 @@ import project.interfaces.Command;
 import project.parts.Attribute;
 import project.parts.Element;
 import project.parts.FinderOfElem;
+import project.parts.XmlLoader;
+
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +20,13 @@ import java.util.Set;
  */
 public class ChildrenCommand implements Command {
 
+    private FinderOfElem finder;
+    private XmlLoader loader;
+
+    public ChildrenCommand(XmlLoader loader, FinderOfElem finder) {
+        this.loader = loader;
+        this.finder = finder;
+    }
     public ChildrenCommand() {}
 
     @Override
@@ -43,7 +52,7 @@ public class ChildrenCommand implements Command {
             throw new BadIndex("Wrong element id, must be a number.");
         }
 
-        Element parent = FinderOfElem.findByResolvedId(element, parentId);
+        Element parent = finder.findByResolvedId(element, parentId);
         if (parent == null) {
             throw new NoElement("No element with id " + parentId + " found.");
         }

@@ -81,17 +81,5 @@ public class Engine {
         scanner.close();
     }
 
-    public static void main(String[] args) {
-        XmlLoader loader = new XmlLoader();
-        SaveStorage storage = new SaveStorage(loader);
-        Context ctx = new Context(storage);
-        CommandExecution exec = new CommandExecution();
-        Engine engine = new Engine(ctx, exec);
 
-        project.parts.Element root = new project.parts.Element("root");
-        root.id = 1;
-        ctx.setElement(root);
-
-        engine.run();
-    }
 }

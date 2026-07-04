@@ -12,7 +12,18 @@ import project.interfaces.Command;
  * Usage: `text id` returns the element's text; `text id text...` sets the text and confirms.
  */
 
-public class TextCommand implements Command {
+public class TextCommand implements Command
+{
+    private FinderOfElem finder;
+
+    public TextCommand(FinderOfElem finder) {
+        this.finder = finder;
+    }
+
+    public TextCommand() {
+
+    }
+
     @Override
     public String execute(String[] args, Context context) throws NoElement {
         if (args == null || args.length < 1) {
@@ -36,7 +47,7 @@ public class TextCommand implements Command {
             throw new BadIndex("Id of an element must be a number.");
         }
 
-        Element found = FinderOfElem.findByResolvedId(root, targetId);
+        Element found = finder.findByResolvedId(root, targetId);
         if (found == null) {
             throw new NoElement("No element with " + targetId + " found.");
         }

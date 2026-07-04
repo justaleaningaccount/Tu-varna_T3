@@ -13,6 +13,12 @@ import project.parts.FinderOfElem;
 
 public class SelectCommand implements Command
 {
+    private FinderOfElem finder;
+
+    public SelectCommand(FinderOfElem finder) {
+        this.finder = finder;
+    }
+
     public SelectCommand() {}
 
     @Override
@@ -46,7 +52,7 @@ public class SelectCommand implements Command
             throw new BadIndex("Id of an element must be a number.");
         }
 
-        Element found = FinderOfElem.findByResolvedId(element, targetId);
+        Element found = finder.findByResolvedId(element, targetId);
         if (found == null) {
             throw new NoElement("No element with id " + targetId + " found.");
         }

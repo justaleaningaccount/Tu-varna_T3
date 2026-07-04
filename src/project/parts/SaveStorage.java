@@ -6,7 +6,7 @@ import project.interfaces.FileManager;
  * Provides a simple persistence adapter used by Context and Engine.
  */
 public class SaveStorage implements FileManager {
-    private final XmlLoader loader;
+    private XmlLoader loader;
 
     public SaveStorage(XmlLoader loader) {
         this.loader = loader;

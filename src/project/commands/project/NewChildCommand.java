@@ -16,8 +16,15 @@ import project.parts.IdMaker;
 
 public class NewChildCommand implements Command {
 
-    public NewChildCommand() {}
+    private IdMaker newId;
+    private FinderOfElem finder;
 
+    public NewChildCommand(IdMaker newId,FinderOfElem finder) {
+        this.newId = newId;
+        this.finder=finder;
+    }
+
+    public NewChildCommand() {}
     @Override
     public String execute(String[] args, Context context) throws NoElement {
         if (args == null || args.length < 1) {
@@ -45,12 +52,10 @@ public class NewChildCommand implements Command {
             throw new BadIndex("Parent id must be a number.");
         }
 
-        Element parent = FinderOfElem.findByResolvedId(root, parentIds);
+        Element parent = finder.findByResolvedId(root, parentIds);
         Element child = getElement(args, parent, parentIds);
-        int newId = IdMaker.nextResolvedId(root);
-        child.id = newId;
-        parent.addChild(child);
 
+        parent.addChild(child);
         return String.valueOf(newId);
     }
 

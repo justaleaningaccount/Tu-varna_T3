@@ -9,13 +9,13 @@ import java.util.List;
 public class IdMaker
 {
     private IdMaker(){}
-    public static int nextResolvedId(Element root) {
+    public int nextResolvedId(Element root) {
         if (root == null) return 1;
         int max = scanMaxId(root);
         return max + 1;
     }
 
-    private static int scanMaxId(Element current) {
+    private int scanMaxId(Element current) {
         int max = Integer.MIN_VALUE;
         Integer resolved = current.getResolvedId();
         if (resolved != null) max = Math.max(max, resolved);

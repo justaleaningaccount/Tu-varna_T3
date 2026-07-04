@@ -10,7 +10,7 @@ import project.parts.XmlLoader;
  */
 public class Main
 {
-        public static void main(String[] args)
+        static void main()
         {
             XmlLoader loader = new XmlLoader();
             SaveStorage storage = new SaveStorage(loader);

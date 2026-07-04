@@ -15,6 +15,13 @@ import project.parts.FinderOfElem;
  */
 
 public class DeletingCommand implements Command {
+
+    private FinderOfElem finder;
+
+    public DeletingCommand(FinderOfElem finder) {
+        this.finder = finder;
+    }
+
     public DeletingCommand() {}
 
     @Override
@@ -45,7 +52,7 @@ public class DeletingCommand implements Command {
             throw new BadIndex("Id must be a number");
         }
 
-        Element target1 = FinderOfElem.findByResolvedId(ele, target);
+        Element target1 = finder.findByResolvedId(ele, target);
         if (target1 == null) {
             throw new NoElement("No elem with " + target + " found.");
         }
