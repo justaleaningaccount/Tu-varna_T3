@@ -20,9 +20,7 @@ public class TextCommand implements Command
         this.finder = finder;
     }
 
-    public TextCommand() {
-
-    }
+    public TextCommand() {}
 
     @Override
     public String execute(String[] args, Context context) throws NoElement {

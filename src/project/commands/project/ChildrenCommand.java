@@ -8,7 +8,6 @@ import project.interfaces.Command;
 import project.parts.Attribute;
 import project.parts.Element;
 import project.parts.FinderOfElem;
-import project.parts.XmlLoader;
 
 import java.util.List;
 import java.util.Set;
@@ -21,10 +20,8 @@ import java.util.Set;
 public class ChildrenCommand implements Command {
 
     private FinderOfElem finder;
-    private XmlLoader loader;
 
-    public ChildrenCommand(XmlLoader loader, FinderOfElem finder) {
-        this.loader = loader;
+    public ChildrenCommand( FinderOfElem finder) {
         this.finder = finder;
     }
     public ChildrenCommand() {}

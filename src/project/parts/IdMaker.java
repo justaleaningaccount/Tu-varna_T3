@@ -18,7 +18,7 @@ public class IdMaker
     private int scanMaxId(Element current) {
         int max = Integer.MIN_VALUE;
         Integer resolved = current.getResolvedId();
-        if (resolved != null) max = Math.max(max, resolved);
+        if (resolved != null) max = resolved;
 
         List<Element> children = current.getChildren();
         if (children != null)
