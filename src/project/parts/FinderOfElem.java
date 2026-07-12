@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FinderOfElem
 {
-    private FinderOfElem(){}
+    public FinderOfElem(){}
     public  Element findByResolvedId(Element root, int targetId) {
         if (root == null) return null;
         Integer resolved = root.getResolvedId();

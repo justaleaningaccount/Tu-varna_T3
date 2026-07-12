@@ -16,7 +16,7 @@ import project.parts.XmlLoader;
 
 public class ChildCommand implements Command
 {
-    private FinderOfElem finder;
+    private FinderOfElem finder = new FinderOfElem();
 
     public ChildCommand(FinderOfElem finder) {
         this.finder = finder;

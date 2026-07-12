@@ -14,7 +14,7 @@ import project.interfaces.Command;
 
 public class TextCommand implements Command
 {
-    private FinderOfElem finder;
+    private FinderOfElem finder = new FinderOfElem();
 
     public TextCommand(FinderOfElem finder) {
         this.finder = finder;

@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class ChildrenCommand implements Command {
 
-    private FinderOfElem finder;
+    private FinderOfElem finder = new FinderOfElem();
 
     public ChildrenCommand( FinderOfElem finder) {
         this.finder = finder;

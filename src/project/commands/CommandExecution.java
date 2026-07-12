@@ -19,17 +19,17 @@ public class CommandExecution
     public CommandExecution()
     {
         this.commands = new HashMap<>();
-        commands.put("exiting", new ExitingCommand());
+        commands.put("exit", new ExitingCommand());
         commands.put("help", new HelpCommand());
         commands.put("save", new SavingCommand());
         commands.put("open", new OpenCommand());
         commands.put("savingas", new SavingAsCommand());
-        commands.put("closing", new ClosingCommand());
+        commands.put("close", new ClosingCommand());
 
         commands.put("select", new SelectCommand());
-        commands.put("printing", new PrintingCommand());
-        commands.put("setting", new SettingCommand());
-        commands.put("deleting", new DeletingCommand());
+        commands.put("print", new PrintingCommand());
+        commands.put("set", new SettingCommand());
+        commands.put("delete", new DeletingCommand());
         commands.put("child",new ChildCommand());
         commands.put("children",new ChildrenCommand());
         commands.put("newchild", new NewChildCommand());

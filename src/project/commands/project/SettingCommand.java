@@ -14,7 +14,7 @@ import project.parts.FinderOfElem;
 
 public class SettingCommand implements Command
 {
-    private FinderOfElem finder;
+    private FinderOfElem finder = new FinderOfElem();
 
     public SettingCommand(FinderOfElem finder) {
         this.finder = finder;

@@ -17,7 +17,7 @@ import project.parts.IdMaker;
 public class NewChildCommand implements Command {
 
     private IdMaker newId;
-    private FinderOfElem finder;
+    private FinderOfElem finder = new FinderOfElem();
 
     public NewChildCommand(IdMaker newId,FinderOfElem finder) {
         this.newId = newId;

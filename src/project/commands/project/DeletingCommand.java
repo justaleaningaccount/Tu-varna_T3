@@ -16,7 +16,7 @@ import project.parts.FinderOfElem;
 
 public class DeletingCommand implements Command {
 
-    private FinderOfElem finder;
+    private FinderOfElem finder = new FinderOfElem();
 
     public DeletingCommand(FinderOfElem finder) {
         this.finder = finder;

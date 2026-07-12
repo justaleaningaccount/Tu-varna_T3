@@ -13,7 +13,7 @@ import project.parts.FinderOfElem;
 
 public class SelectCommand implements Command
 {
-    private FinderOfElem finder;
+    private FinderOfElem finder = new FinderOfElem();
 
     public SelectCommand(FinderOfElem finder) {
         this.finder = finder;
